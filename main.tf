@@ -31,8 +31,8 @@ resource "azurerm_storage_account" "storagedetails" {
   account_kind = "StorageV2"
 
   tags = {
-    environment = "Test"
-    name = "Rahul"
-    projet = "Terraform"
+    Environment = "Test"
+    Name = "Rahul"
+    Projet = "Terraform"
   }
 }
