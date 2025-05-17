@@ -33,5 +33,6 @@ resource "azurerm_storage_account" "storagedetails" {
   tags = {
     environment = "Test"
     name = "Rahul"
+    projet = "Terraform"
   }
 }
