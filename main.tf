@@ -40,16 +40,16 @@ resource "azurerm_storage_account" "storagedetails" {
 
 resource "azurerm_storage_container" "containerdetails" {
   name                  = "terraformrr"
-  storage_account_id    = "terraformstrr"
+  storage_account_id    = azurerm_storage_account.storagedetails.id
   container_access_type = "blob"
 
   depends_on = [ azurerm_storage_account.storagedetails ]
 }
 
-resource "azurerm_storage_blob" "example" {
+resource "azurerm_storage_blob" "blobdetails" {
   name                   = "myblob"
-  storage_account_name   = "terraformstrr"
-  storage_container_name = "terraformrr"
+  storage_account_name   = azurerm_storage_account.storagedetails.name
+  storage_container_name = azurerm_storage_container.containerdetails.name
   type                   = "Block"
   source                 = "Test.txt"
 
