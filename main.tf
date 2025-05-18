@@ -35,4 +35,23 @@ resource "azurerm_storage_account" "storagedetails" {
     Name = "Rahul"
     Projet = "Terraform"
   }
+  depends_on = [ azurerm_resource_group.rgdetails ]
+}
+
+resource "azurerm_storage_container" "containerdetails" {
+  name                  = "terraformrr"
+  storage_account_id    = "terraformstrr"
+  container_access_type = "blob"
+
+  depends_on = [ azurerm_storage_account.storagedetails ]
+}
+
+resource "azurerm_storage_blob" "example" {
+  name                   = "myblob"
+  storage_account_name   = "terraformstrr"
+  storage_container_name = "terraformrr"
+  type                   = "Block"
+  source                 = "Test.txt"
+
+  depends_on = [ azurerm_storage_container.containerdetails ]
 }
