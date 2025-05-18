@@ -51,7 +51,7 @@ resource "azurerm_storage_blob" "blobdetails" {
   storage_account_name   = azurerm_storage_account.storagedetails.name
   storage_container_name = azurerm_storage_container.containerdetails.name
   type                   = "Block"
-  source                 = "Test1.txt"
+  source                 = "Test.txt"
 
   depends_on = [ azurerm_storage_container.containerdetails ]
 }
