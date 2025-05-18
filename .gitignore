@@ -2,3 +2,5 @@
 .terraform.lock.hcl
 main.tfplan
 terraform.tfvars
+terraform.tfstate
+terraform.tfstate.backup
