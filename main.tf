@@ -17,15 +17,21 @@ client_secret = var.client_secret
 features {}
 }
 
-resource "azurerm_resource_group" "rgdetails" {
-  name     = "Terraform-RG"
+locals {
+  resource_group_name = "Terraform-RG"
   location = "Central India"
+  storage_account_name = "terraformstrr"
+}
+
+resource "azurerm_resource_group" "rgdetails" {
+  name     = locals.resource_group_name
+  location = locals.location
 }
 
 resource "azurerm_storage_account" "storagedetails" {
   name                     = "terraformstrr"
-  resource_group_name      = "Terraform-RG"
-  location                 = "Central India"
+  resource_group_name      = locals.resource_group_name
+  location                 = locals.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
   account_kind = "StorageV2"
@@ -48,7 +54,7 @@ resource "azurerm_storage_container" "containerdetails" {
 
 resource "azurerm_storage_blob" "blobdetails" {
   name                   = "myblob"
-  storage_account_name   = azurerm_storage_account.storagedetails.name
+  storage_account_name   = locals.storage_account_name
   storage_container_name = azurerm_storage_container.containerdetails.name
   type                   = "Block"
   source                 = "Test.txt"
